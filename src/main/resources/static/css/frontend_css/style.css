@@ -1,0 +1,12 @@
+.txt2{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.txt2:hover{
+    color:gray;
+    transition: all 0.3s ease;
+}
