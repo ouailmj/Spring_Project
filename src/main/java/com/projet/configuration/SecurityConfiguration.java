@@ -41,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/**/fonts/**").permitAll()
-                .antMatchers( "/",
+                .antMatchers(
                         "/assets/**",
                         "/build/**",
                         "/asset/**",
@@ -70,7 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().exceptionHandling().accessDeniedPage("/access_denied");
         http.authorizeRequests()
                 .antMatchers("/**/fonts/**").permitAll()
-                .antMatchers( "/",
+                .antMatchers(
                         "/assets/**",
                         "/build/**",
                         "/asset/**",

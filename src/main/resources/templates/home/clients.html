@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Home Page</title>
+    <link rel="stylesheet"  th:href="@{asset/libs/magnific-popup/dist/magnific-popup.css}"/>
+    <link rel="stylesheet" th:href="@{dist/css/style.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{asset/extra-libs/multicheck/multicheck.css}" href="">
+    <link rel="stylesheet" type="text/css" th:href="@{asset/libs/datatables.net-bs4/css/dataTables.bootstrap4.css}" href="">
+    <link th:href="@{font/css/all.css}" rel="stylesheet">
+
+    <style>
+        .sidebar-nav ul .sidebar-item.selected>.sidebar-link {
+            background: #1F262D;
+            opacity: .4;
+            transition:all 0.3s ease
+        }
+        .sidebar-nav ul .sidebar-item.selected>.sidebar-link:hover {
+            opacity: 1;
+            transition:all 0.3s ease
+        }
+        .odd :hover{
+            background: aliceblue;
+            transition:all 0.3s ease;
+        }
+        .odd{
+            transition:all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+<div class="preloader">
+    <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+    </div>
+</div>
+
+<div id="main-wrapper">
+
+    <header style="position: fixed;width: 100%;" class="topbar" data-navbarbg="skin5">
+        <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+            <div class="navbar-header" data-logobg="skin5">
+                <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                <a class="navbar-brand" href="index.html">
+                    <b class="logo-icon p-l-10">
+                        <img style="height: 50px;width: 40px;transform: rotate(-40deg)" th:src="@{icone/shopping-cart.png}" alt="homepage" class="light-logo">
+
+                    </b>
+                    <span class="logo-text">
+                        <img style="width: 135px; height: 50px; margin-left: 20px;" th:src="@{icone/shop-logo.png}" alt="homepage" class="light-logo">
+                    </span>
+                </a>
+                <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+            </div>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                <ul class="navbar-nav float-left mr-auto">
+                    <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="fas fa-bars font-24"></i></a></li>
+                    <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
+                        <form class="app-search position-absolute">
+                            <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="navbar-nav float-right">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle waves-effect waves-dark" style="position: relative;top: 5px;" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="font-24 fas fa-bell"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
+                            <ul class="list-style-none">
+                                <li>
+                                    <div class="">
+                                        <a href="javascript:void(0)" class="link border-top">
+                                            <div class="d-flex no-block align-items-center p-10" style="margin-left: 10px;">
+                                                <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
+                                                <div class="m-l-10" style="padding-left: 10px;padding-top: 5px;">
+                                                    <h5 class="m-b-0">Notification</h5>
+                                                    <span class="mail-desc"> n'est pas en marche </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img th:src="@{asset/images/users/1.jpg}" alt="user" class="rounded-circle" width="31"></a>
+                        <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside style="position: fixed" class="left-sidebar" data-sidebarbg="skin5">
+        <div class="scroll-sidebar">
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav" class="p-t-30">
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-user"></i><span class="hide-menu"> Clients  </span></a>
+                        <ul aria-expanded="false" class="collapse  first-level">
+                            <li class="sidebar-item"><a href="/home/clients" class="sidebar-link"><i class="fas fa-user-cog"></i><span class="hide-menu"> Consulter liste des clients </span></a></li>
+                            <li class="sidebar-item"><a href="/home/clients/add" class="sidebar-link"><i class="fas fa-user-edit"></i><span class="hide-menu"> Ajouter client </span></a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-columns"></i><span class="hide-menu"> Consultations  </span></a>
+                        <ul aria-expanded="false" class="collapse  first-level">
+                            <li class="sidebar-item"><a href="/home/clients" class="sidebar-link"><i class="fas fa-clipboard-list"></i><span class="hide-menu"> Consulter liste des consultation </span></a></li>
+                            <li class="sidebar-item"><a href="/home/clients/add" class="sidebar-link"><i class="far fa-list-alt"></i><span class="hide-menu"> Ajouter consultation </span></a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/donnations" aria-expanded="false"><i class="fas fa-outdent"></i><span class="hide-menu"> Facture </span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="/signaler" aria-expanded="false"><i class="fas fa-object-ungroup"></i><span class="hide-menu"> Produits </span></a>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <div class="page-wrapper" style="margin-top: 65px">
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">Liste des clients :</h4>
+                    <div class="ml-auto text-right">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item" aria-current="page">Home</li>
+                                <li class="breadcrumb-item"><a href="#">Ajouter client</a></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row el-element-overlay">
+                <div class="row" style="width: 100%;">
+                    <div class="col-12">
+                                <div class="table-responsive">
+                                    <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table style="background: white;" id="zero_config" class="table table-striped table-bordered dataTable" role="grid" aria-describedby="zero_config_info">
+                                        <thead>
+                                        <tr><th rowspan="1" colspan="1"><i class="fas fa-user"></i><span class="hide-menu">&nbsp; &nbsp; First name  </span></th>
+                                            <th rowspan="1" colspan="1"><i class="fas fa-user"></i><span class="hide-menu">&nbsp; &nbsp; Last name  </span></th>
+                                            <th rowspan="1" colspan="1"><i class="fas fa-barcode"></i><span class="hide-menu">&nbsp; &nbsp; Reference  </span></th>
+                                            <th rowspan="1" colspan="1"><i class="fas fa-calendar-alt"></i><span class="hide-menu">&nbsp; &nbsp; Cree le  </span></th>
+                                            <th rowspan="1" colspan="1"><i class="fas fa-phone"></i><span class="hide-menu">&nbsp; &nbsp; Num tel  </span></th>
+                                            <th rowspan="1" colspan="1">Sexe</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="client : ${clients.content}" role="row" class="odd">
+                                                <td class="" th:text="${client.firstName}"></td>
+                                                <td th:text="${client.lastName}"></td>
+                                                <td th:text="${client.id}"></td>
+                                                <td class="sorting_1" th:text="${client.createdDate}">19</td>
+                                                <td th:if="${client.address}!=null" th:text="${client.address.tel}"></td>
+                                                <td th:if="${client.address}==null">Pas de numero</td>
+                                                <td th:if="${client.sexe}">Masculin</td>
+                                                <td th:if="${!client.sexe}">Feminin</td>
+                                            </tr>
+                                            </tbody>
+                                    </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-7">
+                                                <div class="dataTables_paginate paging_simple_numbers" id="zero_config_paginate">
+                                                    <ul class="pagination">
+                                                        <li th:classappend="${currentPage}==0?'disabled':''" class="paginate_button page-item previous" id="zero_config_previous">
+                                                            <a th:href="@{/home(page=${currentPage-1})}" href="#" aria-controls="zero_config" data-dt-idx="0" tabindex="0" class="page-link">
+                                                                Previous
+                                                            </a>
+                                                        </li>
+                                                        <li th:each="i : ${#numbers.sequence(0,clients.totalPages-1)}" class="paginate_button page-item" th:classappend="${currentPage}==${i}?'active':''">
+                                                            <a th:href="@{/home(page=${i})}" aria-controls="zero_config" data-dt-idx="1" tabindex="0" class="page-link" th:text="${i}"></a>
+                                                        </li>
+                                                        <li th:classappend="${currentPage}==${clients.totalPages-1}?'disabled':''" class="paginate_button page-item next" id="zero_config_next">
+                                                            <a th:href="@{/home(page=${currentPage + 1})}" href="#" aria-controls="zero_config" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer text-center">
+            All right reserved.
+        </footer>
+    </div>
+</div>
+
+<script th:src="@{asset/libs/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{asset/libs/popper.js/dist/umd/popper.min.js}"></script>
+<script th:src="@{asset/libs/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{asset/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js}"></script>
+<script th:src="@{asset/extra-libs/sparkline/sparkline.js}"></script>
+<script th:src="@{dist/js/waves.js}"></script>
+<script th:src="@{dist/js/sidebarmenu.js}"></script>
+<script th:src="@{dist/js/custom.min.js}"></script>
+<script th:src="@{asset/libs/magnific-popup/dist/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{asset/libs/magnific-popup/meg.init.js}"></script>
+<script th:src="@{asset/extra-libs/multicheck/datatable-checkbox-init.js}"></script>
+<script th:src="@{asset/extra-libs/multicheck/jquery.multicheck.js}"></script>
+<script th:src="@{asset/extra-libs/DataTables/datatables.min.js}"></script>
+</body>
+
+
+</html>

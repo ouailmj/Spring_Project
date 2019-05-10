@@ -41,6 +41,9 @@ public class Client {
     @Temporal(value = TemporalType.DATE)
     private Date birthDate;
 
+    @Embedded
+    Address address;
+
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private Set<Facture> facture;
 

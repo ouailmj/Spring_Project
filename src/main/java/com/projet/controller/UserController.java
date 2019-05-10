@@ -2,12 +2,16 @@ package com.projet.controller;
 
 import com.projet.model.User;
 import com.projet.repository.UserRepository;
+import com.projet.service.ClientService;
 import com.projet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -27,10 +31,13 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ClientService clientService;
+
     @RequestMapping(value = {"/login"},method = GET)
     public ModelAndView login(){
         ModelAndView model = new ModelAndView();
-        model.setViewName("templates/auth/login");
+        model.setViewName("auth/login");
         return model;
     }
 
@@ -40,7 +47,7 @@ public class UserController {
         ModelAndView model = new ModelAndView();
         User user = new User();
         model.addObject("client", user);
-        model.setViewName("templates/auth/signup");
+        model.setViewName("auth/signup");
         return model;
     }
 
@@ -57,7 +64,7 @@ public class UserController {
             userService.saveUser(user);
             model.addObject("msg","user a ete creer avec succes");
             model.addObject("client",new User());
-            model.setViewName("templates/auth/login");
+            model.setViewName("auth/login");
         }
         return model;
     }
@@ -69,4 +76,15 @@ public class UserController {
         model.setViewName("errors/access_denied");
         return model;
     }
+
+
+    @RequestMapping(value = {"/home"},method= GET)
+    public ModelAndView home(@RequestParam(defaultValue = "0") int page) {
+        ModelAndView model = new ModelAndView();
+        model.addObject("clients", clientService.findAll(new PageRequest(page,10,Sort.by("id").descending()),page));
+        model.addObject("currentPage",page);
+        model.setViewName("home/clients");
+        return model;
+    }
+
 }

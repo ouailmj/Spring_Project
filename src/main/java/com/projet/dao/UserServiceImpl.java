@@ -1,10 +1,11 @@
-package com.projet.service;
+package com.projet.dao;
 
 
 import com.projet.model.Role;
 import com.projet.model.User;
 import com.projet.repository.RoleRespository;
 import com.projet.repository.UserRepository;
+import com.projet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 
 
-@Service("clientService")
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Autowired
