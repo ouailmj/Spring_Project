@@ -167,7 +167,7 @@
                                             <tr th:each="client : ${clients.content}" role="row" class="odd">
                                                 <td class="" th:text="${client.firstName}"></td>
                                                 <td th:text="${client.lastName}"></td>
-                                                <td th:text="${client.id}"></td>
+                                                <td th:text="${'#' + client.id}"></td>
                                                 <td class="sorting_1" th:text="${client.createdDate}">19</td>
                                                 <td th:if="${client.address}!=null" th:text="${client.address.tel}"></td>
                                                 <td th:if="${client.address}==null">Pas de numero</td>
