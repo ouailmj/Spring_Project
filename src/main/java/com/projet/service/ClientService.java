@@ -12,4 +12,6 @@ public interface ClientService {
 
     public Boolean updateClient(Client client);
 
+    public Boolean createClient(Client client);
+
 }

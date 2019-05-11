@@ -90,8 +90,10 @@ public class UserController {
     @RequestMapping(value = {"/home"},method= GET)
     public ModelAndView home(@RequestParam(defaultValue = "0") int page) {
         ModelAndView model = new ModelAndView();
+        Client client = new Client();
         model.addObject("clients", clientService.findAll(new PageRequest(page,10,Sort.by("id").descending()),page));
         model.addObject("currentPage",page);
+        model.addObject("client",client);
         model.setViewName("home/clients");
         return model;
     }

@@ -83,4 +83,15 @@ public class ClientController {
 
     }
 
+    @RequestMapping(value = "/home/newClient/submit" , method = POST)
+    public String addClient(Client client, RedirectAttributes redirectAttributes){
+
+        clientService.createClient(client);
+
+        redirectAttributes.addFlashAttribute("updated", "Client created successfully");
+
+        return "redirect:/home";
+
+    }
+
 }

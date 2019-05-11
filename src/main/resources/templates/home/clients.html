@@ -139,7 +139,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item" aria-current="page">Home</li>
-                                <li class="breadcrumb-item"><a href="#">Ajouter client</a></li>
+                                <li class="breadcrumb-item"><a href="" data-toggle="modal" data-target="#modalClotureForm">Ajouter client</a></li>
                             </ol>
                         </nav>
                     </div>
@@ -208,7 +208,89 @@
         </footer>
     </div>
 </div>
-
+<div class="modal fade" id="modalClotureForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div style="border-radius: 5px" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Ajouter nouveau client :</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form" action="#" th:action="@{/home/newClient/submit}" th:object="${client}" method="post"  id="registrationForm">
+                <div class="modal-body mx-3">
+                    <div class="card col-sm-12" style="margin: auto">
+                        <div class="row mb-3">
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="first_name">
+                                    <h4><i style="margin-right: 3px;" class="fas fa-user"></i> First name :</h4></label>
+                                <input type="text" class="form-control" required th:field="${client.firstName}" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="last_name">
+                                    <h4><i style="margin-right: 3px;" class="fas fa-user"></i> Last name :</h4></label>
+                                <input  type="text" required th:field="${client.lastName}" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="xphone-mask">
+                                    <h4><i style="margin-right: 3px;" class="fas fa-phone"></i> Phone :</h4></label>
+                                <input required type="number" th:field="${client.address.tel}" class="form-control xphone-inputmask" id="xphone-mask" placeholder="Veuillez inserer un num...">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="email">
+                                    <h4><i style="margin-right: 3px;" class="fas fa-envelope"></i> Email :</h4></label>
+                                <input required type="email" th:field="${client.email}" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="Address">
+                                    <h4><i style="margin-right: 3px;" class="far fa-address-card"></i>Default Address :</h4></label>
+                                <input required  type="text" th:field="${client.address.rue}"  class="form-control" id="Address" placeholder="Veuillez entrer une addresse" title="enter a location">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="city">
+                                    <h4><i style="margin-right: 3px;" class="fas fa-address-card"></i> City :</h4></label>
+                                <input required type="text" th:field="${client.address.ville}"   class="form-control" id="city" placeholder="Veuillez entrer une addresse" title="enter a location">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="pays">
+                                    <h4><i style="margin-right: 3px;" class="fas fa-address-card"></i> Pays :</h4></label>
+                                <input required type="text" th:field="${client.address.pays}"  class="form-control" id="pays" placeholder="Veuillez entrer une addresse" title="enter a location">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="zip">
+                                    <h4><i style="margin-right: 3px;" class="fas fa-address-card"></i> Pays :</h4></label>
+                                <input required  type="text" th:field="${client.address.zipCode}"  class="form-control" id="zip" placeholder="Veuillez entrer une addresse" title="enter a location">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="birth">
+                                    <h4><i style="margin-right: 3px;" class="fas fa-birthday-cake"></i> Birth date :</h4></label>
+                                <input type="text" th:field="${client.birthDate}"  class="form-control" id="birth" placeholder="ex:1997-04-05..." title="enter your birth date">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label style="margin-bottom: 0px">
+                                    <h4><i style="margin-right: 3px;" class="fas fa-user-plus"></i> Sexe :</h4></label>
+                                <div class="col-md-9">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" checked class="custom-control-input" th:field="${client.sexe}" value="true" id="customControlValidation1" name="radio-stacked" required="">
+                                        <label class="custom-control-label" for="customControlValidation1">Masculin</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" th:field="${client.sexe}" value="false" id="customControlValidation2" name="radio-stacked" required="">
+                                        <label class="custom-control-label" for="customControlValidation2">Feminin</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Valider Formulaire</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script th:src="@{asset/libs/jquery/dist/jquery.min.js}"></script>
 <script th:src="@{asset/libs/popper.js/dist/umd/popper.min.js}"></script>
 <script th:src="@{asset/libs/bootstrap/dist/js/bootstrap.min.js}"></script>

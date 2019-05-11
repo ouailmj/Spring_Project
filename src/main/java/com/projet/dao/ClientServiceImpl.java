@@ -49,4 +49,15 @@ public class ClientServiceImpl implements ClientService {
         return true;
     }
 
+    @Override
+    public Boolean createClient(Client client) {
+        try{
+            clientRepository.save(client);
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+        return true;
+    }
+
 }
