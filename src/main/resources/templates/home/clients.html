@@ -164,7 +164,7 @@
                                             <th rowspan="1" colspan="1">Sexe</th></tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="client : ${clients.content}" role="row" class="odd">
+                                            <tr th:each="client : ${clients.content}"  role="row" class="odd">
                                                 <td class="" th:text="${client.firstName}"></td>
                                                 <td th:text="${client.lastName}"></td>
                                                 <td th:text="${'#' + client.id}"></td>
@@ -173,6 +173,7 @@
                                                 <td th:if="${client.address}==null">Pas de numero</td>
                                                 <td th:if="${client.sexe}">Masculin</td>
                                                 <td th:if="${!client.sexe}">Feminin</td>
+                                                <a th:href="@{${'/home/client/' + client.id}}"> ddkjlsdj</a>
                                             </tr>
                                             </tbody>
                                     </table>

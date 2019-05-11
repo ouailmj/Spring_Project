@@ -21,4 +21,9 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.findAll(new PageRequest(page,10, Sort.by("id").descending()));
     }
 
+    @Override
+    public Client findClient(long id) {
+        return clientRepository.findById(id).get();
+    }
+
 }

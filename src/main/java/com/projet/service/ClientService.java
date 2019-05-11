@@ -8,4 +8,6 @@ public interface ClientService {
 
     public Page<Client> findAll(PageRequest pageRequest,int page);
 
+    public Client findClient(long id);
+
 }
