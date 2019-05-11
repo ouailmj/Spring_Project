@@ -10,4 +10,6 @@ public interface ClientService {
 
     public Client findClient(long id);
 
+    public Boolean updateClient(Client client);
+
 }

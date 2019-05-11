@@ -1,5 +1,6 @@
 package com.projet.dao;
 
+import com.projet.model.Address;
 import com.projet.model.Client;
 import com.projet.repository.ClientRepository;
 import com.projet.service.ClientService;
@@ -24,6 +25,28 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client findClient(long id) {
         return clientRepository.findById(id).get();
+    }
+
+    @Override
+    public Boolean updateClient(Client client) {
+
+        try {
+            Client updatedClient = this.findClient(client.getId());
+            Address address = new Address();
+            address.setPays(client.getAddress().getPays());
+            address.setVille(client.getAddress().getVille());
+            address.setRue(client.getAddress().getRue());
+            address.setZipCode(client.getAddress().getZipCode());
+            address.setTel(client.getAddress().getTel());
+            updatedClient.setAddress(address);
+            updatedClient.setFirstName(client.getFirstName());
+            updatedClient.setLastName(client.getLastName());
+            updatedClient.setEmail(client.getEmail());
+            clientRepository.save(updatedClient);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
 }

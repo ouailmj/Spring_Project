@@ -1,14 +1,18 @@
 package com.projet.controller;
 
+import com.projet.model.Address;
 import com.projet.model.Client;
 import com.projet.model.Consultation;
 import com.projet.model.User;
+import com.projet.repository.ClientRepository;
 import com.projet.repository.UserRepository;
 import com.projet.service.ClientService;
 import com.projet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -32,13 +36,13 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
     UserRepository userRepository;
 
     @Autowired
     ClientService clientService;
+
+    @Autowired
+    ClientRepository clientRepository;
 
     @RequestMapping(value = {"/login"},method = GET)
     public ModelAndView login(){
@@ -75,7 +79,6 @@ public class UserController {
         return model;
     }
 
-
     @RequestMapping(value = {"/access_denied"},method= GET)
     public ModelAndView accessDenied() {
         ModelAndView model = new ModelAndView();
@@ -93,19 +96,4 @@ public class UserController {
         return model;
     }
 
-    @RequestMapping(value = "/home/client/{id}", method = GET)
-    public ModelAndView detailClient(@PathVariable("id") long id) {
-        ModelAndView model = new ModelAndView();
-        Client client = clientService.findClient(id);
-        Set<Consultation> consultations =  client.getConsultation();
-        int i = 0;
-        for(Consultation c : consultations){
-            i = i + c.getProduits().size();
-        }
-        model.addObject("client",client);
-        model.addObject("consultations",client.getConsultation());
-        model.addObject("produits", i);
-        model.setViewName("home/detail");
-        return model;
-    }
 }

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Detail client Page</title>
+    <title>Home Page</title>
     <link rel="stylesheet"  th:href="@{/asset/libs/magnific-popup/dist/magnific-popup.css}"/>
     <link rel="stylesheet" th:href="@{/dist/css/style.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/asset/extra-libs/multicheck/multicheck.css}" href="">
@@ -31,6 +31,85 @@
         .odd{
             transition:all 0.3s ease;
         }
+        .modal-confirm {
+            color: #636363;
+            width: 325px;
+        }
+        .modal-confirm .modal-content {
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+        .modal-confirm .modal-header {
+            border-bottom: none;
+            position: relative;
+        }
+        .modal-confirm h4 {
+            text-align: center;
+            font-size: 26px;
+            margin: 30px 0 -15px;
+        }
+        .modal-confirm .form-control, .modal-confirm .btn {
+            min-height: 40px;
+            border-radius: 3px;
+        }
+        .modal-confirm .close {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+        .modal-confirm .modal-footer {
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+        .modal-confirm .icon-box {
+            color: #fff;
+            position: absolute;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            top: -70px;
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            z-index: 9;
+            background: #82ce34;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+        .modal-confirm .icon-box i {
+            font-size: 58px;
+            position: relative;
+            top: 3px;
+        }
+        .modal-confirm.modal-dialog {
+            margin-top: 80px;
+        }
+        .modal-confirm .btn {
+            color: #fff;
+            border-radius: 4px;
+            background: #82ce34;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            border: none;
+        }
+        .modal-confirm .btn:hover, .modal-confirm .btn:focus {
+            background: #6fb32b;
+            outline: none;
+        }
+        .trigger-btn {
+            display: inline-block;
+            margin: 100px auto;
+        }
+        @media (min-width: 992px){
+            .container {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -43,7 +122,24 @@
 </div>
 
 <div id="main-wrapper">
-
+    <div th:if="${updated} != null" id="myModal" ref="myModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="material-icons"><i style="font-size: 42px;top: -13px;" class="fas fa-check"></i></i>
+                    </div>
+                    <h4 style="text-align: center;font-size: 25px;margin: 32px 43px -22px;" class="modal-title">Info</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">Client updated successfully</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <header style="position: fixed;width: 100%;" class="topbar" data-navbarbg="skin5">
         <nav class="navbar top-navbar navbar-expand-md navbar-dark">
             <div class="navbar-header" data-logobg="skin5">
@@ -177,8 +273,8 @@
             </div>
             <div class="card col-sm-9">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item"> <a th:href="@{${'/home/client/'+ id}}" class="nav-link active" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down"><b>Profile</b> </span></a> </li>
-                    <li class="nav-item"> <a th:href="@{${'/home/client/edit/'+ id}}" class="nav-link"  role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down"><b>Edit Profile</b> </span></a> </li>
+                    <li class="nav-item"> <a th:href="@{${'/home/client/'+ id}}" class="nav-link" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down"><b>Profile</b> </span></a> </li>
+                    <li class="nav-item"> <a th:href="@{${'/home/client/edit/'+ id}}" class="nav-link active"  role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down"><b>Edit Profile</b> </span></a> </li>
                 </ul>
                 <div class="tab-content tabcontent-border">
                     <div class="tab-pane active" id="profile" role="tabpanel">
@@ -189,90 +285,67 @@
                                     <h4 class="text-center" th:text="${client.firstName + ' ' + client.lastName}"></h4>
                                 </div>
                                 <hr>
-                                <form class="form" action="##" method="post" id="registrationForm">
+                                <form class="form" action="#" th:action="@{/home/profile/submit}" th:object="${client}" method="post" id="registrationForm">
                                     <div class="card col-sm-11" style="margin: auto">
                                         <div class="row mb-3">
                                             <div class="form-group col-md-6 col-sm-12">
                                                 <label for="first_name">
                                                     <h4><i style="margin-right: 3px;" class="fas fa-user"></i> First name :</h4></label>
-                                                <input type="text" class="form-control" th:value="${client.firstName}" name="first_name" readonly id="first_name" placeholder="first name" title="enter your first name if any.">
+                                                <input type="text" class="form-control" required th:field="${client.firstName}" th:value="${client.firstName}" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
                                             </div>
                                             <div class="form-group col-md-6 col-sm-12">
                                                 <label for="last_name">
                                                     <h4><i style="margin-right: 3px;" class="fas fa-user"></i> Last name :</h4></label>
-                                                <input readonly type="text" th:value="${client.lastName}" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                                                <input  type="text" required th:field="${client.lastName}" th:value="${client.lastName}" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
                                             </div>
-                                            <div th:if="${client.address} != null" class="form-group col-md-6 col-sm-12">
+                                            <div class="form-group col-md-6 col-sm-12">
                                                 <label for="xphone-mask">
                                                     <h4><i style="margin-right: 3px;" class="fas fa-phone"></i> Phone :</h4></label>
-                                                <input readonly type="text" th:value="${client.address.tel}" class="form-control xphone-inputmask" id="xphone-mask" placeholder="Pas de num de tel">
+                                                <input required th:if="${client.address} != null" type="number" th:field="${client.address.tel}" th:value="${client.address.tel}" class="form-control xphone-inputmask" id="xphone-mask" placeholder="Pas de num de tel">
+                                                <input required th:if="${client.address} == null" type="number" th:field="${client.address.tel}" class="form-control xphone-inputmask" id="xphone-mask" placeholder="Veuillez inserer un num...">
                                             </div>
                                             <div class="form-group col-md-6 col-sm-12">
                                                 <label for="email">
                                                     <h4><i style="margin-right: 3px;" class="fas fa-envelope"></i> Email :</h4></label>
-                                                <input readonly type="email" th:value="${client.email}" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                                                <input required type="email" th:field="${client.email}" th:value="${client.email}" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
                                             </div>
                                             <div class="form-group col-md-6 col-sm-12">
                                                 <label for="Address">
                                                     <h4><i style="margin-right: 3px;" class="far fa-address-card"></i>Default Address :</h4></label>
-                                                <input th:if="${client.address} != null" readonly type="email" th:value="${client.address.rue}" class="form-control" id="Address" placeholder="Pas d'address" title="enter a location">
-                                                <input th:if="${client.address} == null" readonly type="email" value="Pas d'address pour le moment" class="form-control" id="Address" placeholder="Pas d'address" title="enter a location">
+                                                <input required th:if="${client.address} != null" type="text" th:field="${client.address.rue}" th:value="${client.address.rue}" class="form-control" id="Address" placeholder="Veuillez entrer une addresse" title="enter a location">
+                                                <input required th:if="${client.address} == null" type="text" th:field="${client.address.rue}"  class="form-control" id="Address" placeholder="Veuillez entrer une addresse" title="enter a location">
                                             </div>
                                             <div class="form-group col-md-6 col-sm-12">
                                                 <label for="city">
                                                     <h4><i style="margin-right: 3px;" class="fas fa-address-card"></i> City :</h4></label>
-                                                <input th:if="${client.address} != null" readonly type="email" th:value="${client.address.ville}"  class="form-control" id="city" placeholder="Pas d'addresse" title="enter a location">
-                                                <input th:if="${client.address} == null" readonly type="email"  value="Pas d'address pour le moment" class="form-control" id="city" placeholder="Pas d'addresse" title="enter a location">
+                                                <input required th:if="${client.address} != null" type="text" th:field="${client.address.ville}"  th:value="${client.address.ville}"  class="form-control" id="city" placeholder="Veuillez entrer une addresse" title="enter a location">
+                                                <input required th:if="${client.address} == null" type="text" th:field="${client.address.ville}"   class="form-control" id="city" placeholder="Veuillez entrer une addresse" title="enter a location">
                                             </div>
                                             <div class="form-group col-md-6 col-sm-12">
                                                 <label for="pays">
                                                     <h4><i style="margin-right: 3px;" class="fas fa-address-card"></i> Pays :</h4></label>
-                                                <input th:if="${client.address} != null" readonly type="email" th:value="${client.address.pays}"  class="form-control" id="pays" placeholder="Pas d'addresse" title="enter a location">
-                                                <input th:if="${client.address} == null" readonly type="email" value="Pas d'adresse pour le moment"  class="form-control" id="pays" placeholder="Pas d'addresse" title="enter a location">
+                                                <input required th:if="${client.address} != null" type="text" th:field="${client.address.pays}"  th:value="${client.address.pays}"  class="form-control" id="pays" placeholder="Veuillez enter une addresse" title="enter a location">
+                                                <input required th:if="${client.address} == null" type="text" th:field="${client.address.pays}"  class="form-control" id="pays" placeholder="Veuillez entrer une addresse" title="enter a location">
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-12">
+                                                <label for="zip">
+                                                    <h4><i style="margin-right: 3px;" class="fas fa-address-card"></i> Pays :</h4></label>
+                                                <input required th:if="${client.address} != null" type="text" th:field="${client.address.zipCode}"  th:value="${client.address.zipCode}"  class="form-control" id="zip" placeholder="Veuillez enter une addresse" title="enter a location">
+                                                <input required th:if="${client.address} == null" type="text" th:field="${client.address.zipCode}"  class="form-control" id="zip" placeholder="Veuillez entrer une addresse" title="enter a location">
                                             </div>
                                         </div>
-
+                                        <input type="hidden" required th:field="${client.id}" th:value="${id}" />
+                                        <div class="border-top" style="width:100%;margin-bottom: 20px">
+                                            <div class="card-body" style="float:right;padding-bottom:0px">
+                                                <button type="submit" class="btn btn-success btn-lg">Valider</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="container-fluid" style="display:flex;">
-            <div class="col-sm-2" style="margin-right:10px">
-            </div>
-            <div class="card col-sm-9" style="height:50%">
-                    <div class="card-body">
-                        <h4 class="card-title m-b-0">Last 3 Consultations :</h4>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col"><i class="fas fa-barcode"></i> Reference</th>
-                                <th scope="col"><i class="fas fa-calendar-edit"></i> Date</th>
-                                <th scope="col"><i class="fas fa-tag"></i> Montant Total</th>
-                                <th scope="col"><i class="far fa-chart-bar"></i> Mesures </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="consultation : ${consultations}">
-                                <th scope="row" th:text="${'#'+consultation.id}"></th>
-                                <td th:text="${consultation.createdDate}"></td>
-                                <td th:text="${consultation.prix}"></td>
-                                <td>
-                                    <span class="text-success">OG : </span><span th:text="${'+' + consultation.mesure.getAddOG() + ' (' + consultation.mesure.getSphereOG() + ') ' + consultation.mesure.getAxeOD() + '&#176;' + ' &nbsp; &nbsp;'}  "></span>
-                                    <span class="text-warning">OD : </span><span th:text="${'+' + consultation.mesure.getAddOD() + ' (' + consultation.mesure.getSphereOD() + ') ' + consultation.mesure.getAxeOD() + '&#176;' }  "></span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="border-top" style="width:100%">
-                            <div class="card-body" style="float:right;padding-bottom:0px">
-                                <button type="button" class="btn btn-outline-primary">Ajouter Consultation</button>
-                            </div>
-                        </div>
-                    </div>
             </div>
         </div>
         <footer class="footer text-center">
@@ -294,6 +367,9 @@
 <script th:src="@{/asset/extra-libs/multicheck/datatable-checkbox-init.js}"></script>
 <script th:src="@{/asset/extra-libs/multicheck/jquery.multicheck.js}"></script>
 <script th:src="@{/asset/extra-libs/DataTables/datatables.min.js}"></script>
+<script>
+    $('#myModal').modal('show');
+</script>
 </body>
 
 

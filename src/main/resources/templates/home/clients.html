@@ -164,7 +164,7 @@
                                             <th rowspan="1" colspan="1">Sexe</th></tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="client : ${clients.content}"  role="row" class="odd">
+                                            <tr th:onclick="'func('+${client.id}+')'" th:each="client : ${clients.content}"  role="row" class="odd">
                                                 <td class="" th:text="${client.firstName}"></td>
                                                 <td th:text="${client.lastName}"></td>
                                                 <td th:text="${'#' + client.id}"></td>
@@ -173,7 +173,6 @@
                                                 <td th:if="${client.address}==null">Pas de numero</td>
                                                 <td th:if="${client.sexe}">Masculin</td>
                                                 <td th:if="${!client.sexe}">Feminin</td>
-                                                <a th:href="@{${'/home/client/' + client.id}}"> ddkjlsdj</a>
                                             </tr>
                                             </tbody>
                                     </table>
@@ -223,6 +222,11 @@
 <script th:src="@{asset/extra-libs/multicheck/datatable-checkbox-init.js}"></script>
 <script th:src="@{asset/extra-libs/multicheck/jquery.multicheck.js}"></script>
 <script th:src="@{asset/extra-libs/DataTables/datatables.min.js}"></script>
+<script>
+    function func(id) {
+        window.location.href = '/home/client/' + id;
+    }
+</script>
 </body>
 
 
