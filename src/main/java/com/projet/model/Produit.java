@@ -28,13 +28,13 @@ public class Produit {
 
     private String type;
 
-    private double prixOD;
-
-    private double prixOG;
+    private double prix;
 
     private int indice;
 
     private double diametre;
+
+    private double qte;
 
     @ManyToOne
     @JoinColumn
@@ -45,6 +45,5 @@ public class Produit {
 
     @LastModifiedDate
     private LocalDate lastmodifiedDate;
-
 
 }

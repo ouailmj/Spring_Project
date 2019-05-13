@@ -38,8 +38,7 @@ public class Client {
 
     private boolean sexe;
 
-    @Temporal(value = TemporalType.DATE)
-    private Date birthDate;
+    private String birthDate;
 
     @Embedded
     Address address;

@@ -209,18 +209,19 @@
                 <ul id="sidebarnav" class="p-t-30">
                     <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-user"></i><span class="hide-menu"> Clients  </span></a>
                         <ul aria-expanded="false" class="collapse  first-level">
-                            <li class="sidebar-item"><a href="/home/clients" class="sidebar-link"><i class="fas fa-user-cog"></i><span class="hide-menu"> Consulter liste des clients </span></a></li>
-                            <li class="sidebar-item"><a href="/home/clients/add" class="sidebar-link"><i class="fas fa-user-edit"></i><span class="hide-menu"> Ajouter client </span></a></li>
+                            <li class="sidebar-item"><a href="/consultations" class="sidebar-link"><i class="fas fa-user-cog"></i><span class="hide-menu"> Consulter liste des clients </span></a></li>
                         </ul>
                     </li>
                     <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-columns"></i><span class="hide-menu"> Consultations  </span></a>
                         <ul aria-expanded="false" class="collapse  first-level">
-                            <li class="sidebar-item"><a href="/home/clients" class="sidebar-link"><i class="fas fa-clipboard-list"></i><span class="hide-menu"> Consulter liste des consultation </span></a></li>
-                            <li class="sidebar-item"><a href="/home/clients/add" class="sidebar-link"><i class="far fa-list-alt"></i><span class="hide-menu"> Ajouter consultation </span></a></li>
+                            <li class="sidebar-item"><a href="/consultations" class="sidebar-link"><i class="fas fa-clipboard-list"></i><span class="hide-menu"> Consulter liste des consultation </span></a></li>
                         </ul>
                     </li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/donnations" aria-expanded="false"><i class="fas fa-outdent"></i><span class="hide-menu"> Facture </span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="/signaler" aria-expanded="false"><i class="fas fa-object-ungroup"></i><span class="hide-menu"> Produits </span></a>
+
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/facture" aria-expanded="false"><i class="fas fa-outdent"></i><span class="hide-menu"> Facture </span></a></li>
+                    <li class="sidebar-item"> <a th:href="@{/product}" class="sidebar-link waves-effect waves-dark"  aria-expanded="false"><i class="fas fa-object-ungroup"></i><span class="hide-menu"> Produits </span></a>
+                    <li class="sidebar-item"> <a th:href="@{/Entreprise}" class="sidebar-link waves-effect waves-dark" aria-expanded="false"><i class="fas fa-building"></i><span class="hide-menu"> Entreprise </span></a>
+                    <li th:if="${role}==ADMIN" class="sidebar-item"> <a th:href="@{/Utilisateur}" class="sidebar-link waves-effect waves-dark" aria-expanded="false"><i class="fas fa-user-friends"></i><span class="hide-menu"> Utilisateurs </span></a>
                 </ul>
             </nav>
         </div>

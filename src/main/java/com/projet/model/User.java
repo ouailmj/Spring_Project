@@ -11,10 +11,6 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
 public class User {
@@ -60,6 +56,10 @@ public class User {
     @LastModifiedDate
     private LocalDate lastmodifiedDate;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private EntrAD entrAD;
+
+    public User(){}
 
     public User(@Size(max = 100) String email, @Size(max = 100) String firstName, @Size(max = 100) String lastName, String password, Address address) {
         this.email = email;
@@ -67,6 +67,30 @@ public class User {
         this.lastName = lastName;
         this.password = password;
         this.address = address;
+    }
+
+    public Set<Consultation> getConsultation() {
+        return consultation;
+    }
+
+    public void setConsultation(Set<Consultation> consultation) {
+        this.consultation = consultation;
+    }
+
+    public Set<Produit> getProduit() {
+        return produit;
+    }
+
+    public void setProduit(Set<Produit> produit) {
+        this.produit = produit;
+    }
+
+    public EntrAD getEntrAD() {
+        return entrAD;
+    }
+
+    public void setEntrAD(EntrAD entrAD) {
+        this.entrAD = entrAD;
     }
 
     public long getId() {

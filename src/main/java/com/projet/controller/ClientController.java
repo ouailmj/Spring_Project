@@ -3,6 +3,8 @@ package com.projet.controller;
 
 import com.projet.model.Client;
 import com.projet.model.Consultation;
+import com.projet.model.User;
+import com.projet.repository.UserRepository;
 import com.projet.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -22,6 +25,9 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     @RequestMapping(value = "/home/client/{id}", method = GET)
@@ -44,7 +50,8 @@ public class ClientController {
         model.addObject("client",client);
         model.addObject("consultations",consultations);
         model.addObject("produits", i);
-
+        List<User> user =userRepository.findAll();
+        model.addObject("role",user.get(0).getRoleCabinet());
         model.setViewName("home/detail");
 
         return model;
@@ -69,6 +76,8 @@ public class ClientController {
         model.addObject("client",client);
         model.addObject("consultations",consultations);
         model.setViewName("home/editProfile");
+        List <User>user =userRepository.findAll();
+        model.addObject("role",user.get(0).getRoleCabinet());
         return model;
     }
 
